@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="62d234b3c52e4b96968f12de6b84819b" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="DB01Model.Evler" Width="1.5" PointX="5.375" PointY="4.125" />
+        <EntityTypeShape EntityType="DB01Model.Kategori" Width="1.5" PointX="7.875" PointY="4.375" />
+        <EntityTypeShape EntityType="DB01Model.Kayit" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="DB01Model.Kullanici" Width="1.5" PointX="7.75" PointY="1.5" />
+        <AssociationConnector Association="DB01Model.FK_Evler_ToKategori" />
+        <AssociationConnector Association="DB01Model.FK_Kayit_ToEvler" />
+        <AssociationConnector Association="DB01Model.FK_Kayit_ToKullanici" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

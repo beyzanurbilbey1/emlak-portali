@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Evler">
+          <Key>
+            <PropertyRef Name="evId" />
+          </Key>
+          <Property Name="evId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="evKat" Type="int" Nullable="false" />
+          <Property Name="evFiyat" Type="int" Nullable="false" />
+          <Property Name="evAdres" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="evSatilikKiralik" Type="nvarchar" MaxLength="50" />
+          <Property Name="evEsya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="evOdaSayisi" Type="int" Nullable="false" />
+          <Property Name="evGorsel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="evKatId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="evKodu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="katId" />
+          </Key>
+          <Property Name="katId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="katAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kayit">
+          <Key>
+            <PropertyRef Name="KayitId" />
+          </Key>
+          <Property Name="KayitId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitEvId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitKulId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciId" />
+          </Key>
+          <Property Name="kullaniciId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kullaniciAdSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kullaniciTel" Type="int" Nullable="false" />
+          <Property Name="kullaniciMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kullaniciParola" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kullaniciYetki" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Evler_ToKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Evler" Type="Self.Evler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="katId" />
+            </Principal>
+            <Dependent Role="Evler">
+              <PropertyRef Name="evKatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToEvler">
+          <End Role="Evler" Type="Self.Evler" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evler">
+              <PropertyRef Name="evId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitEvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToKullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitKulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB01ModelStoreContainer">
+          <EntitySet Name="Evler" EntityType="Self.Evler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kayit" EntityType="Self.Kayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Evler_ToKategori" Association="Self.FK_Evler_ToKategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Evler" EntitySet="Evler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToEvler" Association="Self.FK_Kayit_ToEvler">
+            <End Role="Evler" EntitySet="Evler" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToKullanici" Association="Self.FK_Kayit_ToKullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB01Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Evler" EntityType="DB01Model.Evler" />
+          <EntitySet Name="Kategori" EntityType="DB01Model.Kategori" />
+          <EntitySet Name="Kayit" EntityType="DB01Model.Kayit" />
+          <EntitySet Name="Kullanici" EntityType="DB01Model.Kullanici" />
+          <AssociationSet Name="FK_Evler_ToKategori" Association="DB01Model.FK_Evler_ToKategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Evler" EntitySet="Evler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToEvler" Association="DB01Model.FK_Kayit_ToEvler">
+            <End Role="Evler" EntitySet="Evler" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToKullanici" Association="DB01Model.FK_Kayit_ToKullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Evler">
+          <Key>
+            <PropertyRef Name="evId" />
+          </Key>
+          <Property Name="evId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="evKat" Type="Int32" Nullable="false" />
+          <Property Name="evFiyat" Type="Int32" Nullable="false" />
+          <Property Name="evAdres" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="evSatilik" Type="String" Nullable="false" />
+          <Property Name="evKiralik" Type="String" Nullable="false" />
+          <Property Name="evEsya" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="evOdaSayisi" Type="Int32" Nullable="false" />
+          <Property Name="evGorsel" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="evKatId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="evKodu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kategori" Relationship="DB01Model.FK_Evler_ToKategori" FromRole="Evler" ToRole="Kategori" />
+          <NavigationProperty Name="Kayit" Relationship="DB01Model.FK_Kayit_ToEvler" FromRole="Evler" ToRole="Kayit" />
+          <Property Name="evSatilikKiralik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="katId" />
+          </Key>
+          <Property Name="katId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="katAd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Evler" Relationship="DB01Model.FK_Evler_ToKategori" FromRole="Kategori" ToRole="Evler" />
+        </EntityType>
+        <EntityType Name="Kayit">
+          <Key>
+            <PropertyRef Name="KayitId" />
+          </Key>
+          <Property Name="KayitId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitKatId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitEvId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitKulId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Evler" Relationship="DB01Model.FK_Kayit_ToEvler" FromRole="Kayit" ToRole="Evler" />
+          <NavigationProperty Name="Kullanici" Relationship="DB01Model.FK_Kayit_ToKullanici" FromRole="Kayit" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciId" />
+          </Key>
+          <Property Name="kullaniciId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciAdSoyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciTel" Type="Int32" Nullable="false" />
+          <Property Name="kullaniciMail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciParola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kullaniciYetki" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kayit" Relationship="DB01Model.FK_Kayit_ToKullanici" FromRole="Kullanici" ToRole="Kayit" />
+        </EntityType>
+        <Association Name="FK_Evler_ToKategori">
+          <End Type="DB01Model.Kategori" Role="Kategori" Multiplicity="1" />
+          <End Type="DB01Model.Evler" Role="Evler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="katId" />
+            </Principal>
+            <Dependent Role="Evler">
+              <PropertyRef Name="evKatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToEvler">
+          <End Type="DB01Model.Evler" Role="Evler" Multiplicity="1" />
+          <End Type="DB01Model.Kayit" Role="Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evler">
+              <PropertyRef Name="evId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitEvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToKullanici">
+          <End Type="DB01Model.Kullanici" Role="Kullanici" Multiplicity="1" />
+          <End Type="DB01Model.Kayit" Role="Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="kullaniciId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitKulId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB01ModelStoreContainer" CdmEntityContainer="DB01Entities">
+          <EntitySetMapping Name="Evler">
+            <EntityTypeMapping TypeName="DB01Model.Evler">
+              <MappingFragment StoreEntitySet="Evler">
+                <ScalarProperty Name="evSatilikKiralik" ColumnName="evSatilikKiralik" />
+                <ScalarProperty Name="evKodu" ColumnName="evKodu" />
+                <ScalarProperty Name="evKatId" ColumnName="evKatId" />
+                <ScalarProperty Name="evGorsel" ColumnName="evGorsel" />
+                <ScalarProperty Name="evEsya" ColumnName="evEsya" />
+                <ScalarProperty Name="evKiralik" ColumnName="evOdaSayisi" />
+                <ScalarProperty Name="evAdres" ColumnName="evAdres" />
+                <ScalarProperty Name="evFiyat" ColumnName="evFiyat" />
+                <ScalarProperty Name="evKat" ColumnName="evKat" />
+                <ScalarProperty Name="evId" ColumnName="evId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="DB01Model.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="katAd" ColumnName="katAd" />
+                <ScalarProperty Name="katId" ColumnName="katId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kayit">
+            <EntityTypeMapping TypeName="DB01Model.Kayit">
+              <MappingFragment StoreEntitySet="Kayit">
+                <ScalarProperty Name="kayitKulId" ColumnName="kayitKulId" />
+                <ScalarProperty Name="kayitEvId" ColumnName="kayitEvId" />
+                <ScalarProperty Name="KayitId" ColumnName="KayitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="DB01Model.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="kullaniciYetki" ColumnName="kullaniciYetki" />
+                <ScalarProperty Name="kullaniciParola" ColumnName="kullaniciParola" />
+                <ScalarProperty Name="kullaniciMail" ColumnName="kullaniciMail" />
+                <ScalarProperty Name="kullaniciTel" ColumnName="kullaniciTel" />
+                <ScalarProperty Name="kullaniciAdSoyad" ColumnName="kullaniciAdSoyad" />
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

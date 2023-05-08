@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB01ModelStoreContainer" CdmEntityContainer="DB01Entities">
+    <EntitySetMapping Name="Evler">
+      <EntityTypeMapping TypeName="DB01Model.Evler">
+        <MappingFragment StoreEntitySet="Evler">
+          <ScalarProperty Name="evSatilikKiralik" ColumnName="evSatilikKiralik" />
+          <ScalarProperty Name="evKodu" ColumnName="evKodu" />
+          <ScalarProperty Name="evKatId" ColumnName="evKatId" />
+          <ScalarProperty Name="evGorsel" ColumnName="evGorsel" />
+          <ScalarProperty Name="evEsya" ColumnName="evEsya" />
+          <ScalarProperty Name="evKiralik" ColumnName="evOdaSayisi" />
+          <ScalarProperty Name="evAdres" ColumnName="evAdres" />
+          <ScalarProperty Name="evFiyat" ColumnName="evFiyat" />
+          <ScalarProperty Name="evKat" ColumnName="evKat" />
+          <ScalarProperty Name="evId" ColumnName="evId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategori">
+      <EntityTypeMapping TypeName="DB01Model.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="katAd" ColumnName="katAd" />
+          <ScalarProperty Name="katId" ColumnName="katId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kayit">
+      <EntityTypeMapping TypeName="DB01Model.Kayit">
+        <MappingFragment StoreEntitySet="Kayit">
+          <ScalarProperty Name="kayitKulId" ColumnName="kayitKulId" />
+          <ScalarProperty Name="kayitEvId" ColumnName="kayitEvId" />
+          <ScalarProperty Name="KayitId" ColumnName="KayitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanici">
+      <EntityTypeMapping TypeName="DB01Model.Kullanici">
+        <MappingFragment StoreEntitySet="Kullanici">
+          <ScalarProperty Name="kullaniciYetki" ColumnName="kullaniciYetki" />
+          <ScalarProperty Name="kullaniciParola" ColumnName="kullaniciParola" />
+          <ScalarProperty Name="kullaniciMail" ColumnName="kullaniciMail" />
+          <ScalarProperty Name="kullaniciTel" ColumnName="kullaniciTel" />
+          <ScalarProperty Name="kullaniciAdSoyad" ColumnName="kullaniciAdSoyad" />
+          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

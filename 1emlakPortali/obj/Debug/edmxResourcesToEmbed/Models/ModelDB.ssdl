@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Evler">
+    <Key>
+      <PropertyRef Name="evId" />
+    </Key>
+    <Property Name="evId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="evKat" Type="int" Nullable="false" />
+    <Property Name="evFiyat" Type="int" Nullable="false" />
+    <Property Name="evAdres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="evSatilikKiralik" Type="nvarchar" MaxLength="50" />
+    <Property Name="evEsya" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="evOdaSayisi" Type="int" Nullable="false" />
+    <Property Name="evGorsel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="evKatId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="evKodu" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="katId" />
+    </Key>
+    <Property Name="katId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="katAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kayit">
+    <Key>
+      <PropertyRef Name="KayitId" />
+    </Key>
+    <Property Name="KayitId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kayitEvId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kayitKulId" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kullaniciAdSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kullaniciTel" Type="int" Nullable="false" />
+    <Property Name="kullaniciMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kullaniciParola" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kullaniciYetki" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Evler_ToKategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Evler" Type="Self.Evler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="katId" />
+      </Principal>
+      <Dependent Role="Evler">
+        <PropertyRef Name="evKatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kayit_ToEvler">
+    <End Role="Evler" Type="Self.Evler" Multiplicity="1" />
+    <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evler">
+        <PropertyRef Name="evId" />
+      </Principal>
+      <Dependent Role="Kayit">
+        <PropertyRef Name="kayitEvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kayit_ToKullanici">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+    <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="Kayit">
+        <PropertyRef Name="kayitKulId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB01ModelStoreContainer">
+    <EntitySet Name="Evler" EntityType="Self.Evler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kayit" EntityType="Self.Kayit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Evler_ToKategori" Association="Self.FK_Evler_ToKategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Evler" EntitySet="Evler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kayit_ToEvler" Association="Self.FK_Kayit_ToEvler">
+      <End Role="Evler" EntitySet="Evler" />
+      <End Role="Kayit" EntitySet="Kayit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kayit_ToKullanici" Association="Self.FK_Kayit_ToKullanici">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Kayit" EntitySet="Kayit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
